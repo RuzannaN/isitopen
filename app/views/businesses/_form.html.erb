@@ -1,0 +1,39 @@
+<%= form_for(@business) do |f| %>
+  <% if @business.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@business.errors.count, "error") %> prohibited this business from being saved:</h2>
+
+      <ul>
+      <% @business.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :description %><br>
+    <%= f.text_field :description %>
+    <%= select("business", "category_id", Category.all.map {|c| [ c.name, c.id ] }, { include_blank: true }) %>
+
+  </div>
+  <div class="field">
+    <%= f.label :image %><br>
+   <%= f.file_field :image %>
+  </div>
+  <div class="field">
+    <%= f.label :morning %><br>
+    <%= f.check_box :morning %>
+  </div>
+  <div class="field">
+    <%= f.label :afternoon %><br>
+    <%= f.check_box :afternoon %>
+  </div>
+  <div class="field">
+    <%= f.label :night %><br>
+    <%= f.check_box :night %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
